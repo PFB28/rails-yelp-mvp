@@ -1,1 +1,30 @@
-<%= @restaurant.name %>
+<div class="container">
+  <h1><%= @restaurant.name %></h1>
+  <div class="restaurant-infos card">
+    <div>
+      <%= @restaurant.category.capitalize %>
+    </div>
+    <div>
+      <p><%= @restaurant.phone_number %></p>
+    </div>
+    <div>
+      <em><%= @restaurant.address %></em>
+    </div>
+  </div>
+  <%= link_to 'Back to restaurants', restaurants_path %>
+  <% @restaurant.reviews.each do |review| %>
+  <div class="review card p-8 d-flex">
+    <%= review.content %>
+    <%= review.rating %>
+  </div>
+  <% end %>
+  <div class="card">
+    <%= simple_form_for [ @restaurant, @review ] do |f| %>
+  <%= f.input :content %>
+  <%= f.input :rating %>
+  <%= f.submit "Submit review", class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to 'Back', restaurant_path(@restaurant) %>
+  </div>
+</div>
